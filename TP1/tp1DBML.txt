@@ -1,0 +1,60 @@
+Table imperio{
+  cgu_imperial integer [primary key]
+  nombre varchar
+  temperatura_promedio float 
+}
+
+Table flota{
+  cgu_de_flota integer [primary key]
+  destino varchar
+  conjunto_misiones varchar
+  imperio_id integer [ref: > imperio.cgu_imperial]
+}
+
+Table nave{
+  codigo_de_flota integer [ref: > flota.cgu_de_flota]  
+  codigo_unico_nave integer 
+  velocidad_maxima integer
+  energia_acumulada integer
+  capitan_id integer [ref: > capitan.id]
+  primary key (cgu_de_flota, codigo_unico_flota) [ref: <> nave_maniobra.codigo_maniobra]
+}
+
+Table capitan{
+  id integer [primary key]
+  nombre varchar
+  planeta_nacimiento varchar [ref: > planetas.ncu_planetario]
+  imperio_id integer [ref: > imperio.cgu_imperial]
+}
+
+Table maniobras{
+  nombre_maniobra varchar [primary key]
+  consumo_energia integer
+}
+
+Table planetas{
+  ncu_planetario varchar [primary key]
+  imperio integer [ref: > imperio.cgu_imperial]
+  poblacion_total integer
+  nombre_vulgar varchar
+  coordenadas_galacticas integer
+  nombre_colinas varchar
+  altura_colinas float
+}
+
+Table raza{
+  ncu varchar [primary key]
+  habilidades varchar
+}
+
+Table raza_planeta{
+  ncu_raza varchar [ref: > raza.ncu]
+  ncu_planeta varchar [ref: > planetas.ncu_planetario]
+  porcentaje_poblacional integer
+  primary key (ncu_raza, ncu_planeta)
+}
+
+Table nave_maniobra {
+  codigo_maniobra integer [primary key]
+  nombre_maniobra varchar [ref: > maniobras.nombre_maniobra]
+}
