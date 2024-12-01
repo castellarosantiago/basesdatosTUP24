@@ -1,0 +1,30 @@
+Table Pacientes {
+    ID_Paciente INT [pk, increment]
+    Nombre VARCHAR(100) [not null]
+    Apellido VARCHAR(100) [not null]
+    DNI VARCHAR(10) [not null, unique]
+    Telefono VARCHAR(15) [not null, unique]
+    Email VARCHAR(100) [not null, unique]
+    Direccion VARCHAR(200) [not null]
+    ObraSocial VARCHAR(200) [not null]
+}
+
+Table Medicos {
+    ID_Medico INT [pk, increment]
+    Nombre VARCHAR(100) [not null]
+    Apellido VARCHAR(100) [not null]
+    Matricula VARCHAR(100) [not null, unique]
+    Telefono VARCHAR(15) [not null, unique]
+    Especialidad VARCHAR(100) [not null]
+}
+
+Table Turnos {
+    ID_Turno INT [pk, increment] 
+    ID_Paciente INT [not null]
+    ID_Medico INT [not null] 
+    Fecha DATE [not null]
+    Hora TIME [not null]
+}
+
+ Ref: Turnos.ID_Paciente> Pacientes.ID_Paciente
+ Ref: Turnos.ID_Medico> Medicos.ID_Medico
